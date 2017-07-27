@@ -28,9 +28,9 @@ var url = "mongodb://localhost:27017/restaurant_db";
 // mongo.connect(url, function(err, db) {
 // 	var collection = db.collection('restaurants');
 // 	var newRestaurantName = prompt("Enter the new restaurant name please: ");
-// 	var newRestaurantAddress = {};
-// 	var newRestaurantStAddress = prompt("Enter the new restaurant street address please: ");
-// 	var newRestaurantZipcode = prompt("Enter the new restaurant zipcode please: ");
+//	var newRestaurantAddress = {};
+//	var newRestaurantStAddress = prompt("Enter the new restaurant street address please: ");
+//	var newRestaurantZipcode = prompt("Enter the new restaurant zipcode please: ");
 // 	var yelpLink = prompt("Enter the new restaurant Yelp link please: ");
 // 	collection.insert({"name":newRestaurantName, "address":{"street":newRestaurantStAddress, "zipcode":newRestaurantZipcode}, "yelp":yelpLink}, function(err, docs) {
 // 		if (err) {
@@ -45,7 +45,14 @@ mongo.connect(url, function(err, db) {
 	var collection = db.collection('restaurants');
 	var editWhichRestaurant = prompt("Enter the name of the restaurant you want to edit: ");
 	var editWhichProperty = prompt("Enter the restaurant property you want to edit. Choose from: 'name', 'address', or 'yelp'. DO NOT INCLUDE QUOTES. ");
-	var editPropertyValue = prompt("Enter the restaurant property value: ");
+	if (editWhichProperty == 'address') {
+		var editPropertyValue = {};
+		var editStAddress = prompt("Enter the updated street address please: ");
+		var editZipcode = prompt("Enter the nupdated zipcode please: ");
+		editPropertyValue.push(editStAddress, editZipcode);
+	} else {
+		var editPropertyValue = prompt("Enter the restaurant property value: ");
+	}	
 	collection.update({"name": editWhichRestaurant}, {$set: {[editWhichProperty]: editPropertyValue}}, function(err, docs) {
 		if (err) {
 			console.log(err);
