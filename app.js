@@ -44,9 +44,9 @@ var url = "mongodb://localhost:27017/restaurant_db";
 mongo.connect(url, function(err, db) {
 	var collection = db.collection('restaurants');
 	var editWhichRestaurant = prompt("Enter the name of the restaurant you want to edit: ");
-	var editWhichProperty = prompt("Enter the restaurant property you want to edit. Choose from: 'name', 'street', 'zipcode', or 'yelp'. DO NOT INCLUDE QUOTES. ");
+	var editWhichProperty = prompt("Enter the restaurant property you want to edit. Choose from: 'name', 'address', or 'yelp'. DO NOT INCLUDE QUOTES. ");
 	var editPropertyValue = prompt("Enter the restaurant property value: ");
-	collection.update({"name": editWhichRestaurant}, {$set: {editWhichProperty: editPropertyValue}}, function(err, docs) {
+	collection.update({"name": editWhichRestaurant}, {$set: {[editWhichProperty]: editPropertyValue}}, function(err, docs) {
 		if (err) {
 			console.log(err);
 		}
