@@ -49,7 +49,8 @@ mongo.connect(url, function(err, db) {
 		var editPropertyValue = {};
 		var editStAddress = prompt("Enter the updated street address please: ");
 		var editZipcode = prompt("Enter the nupdated zipcode please: ");
-		editPropertyValue.push(editStAddress, editZipcode);
+		editPropertyValue.street = editStAddress;
+		editPropertyValue.zipcode = editZipcode;
 	} else {
 		var editPropertyValue = prompt("Enter the restaurant property value: ");
 	}	
